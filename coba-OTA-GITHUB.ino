@@ -10,13 +10,14 @@
 // FIRMWARE VERSION
 // ============================================================
 
-#define FIRMWARE_VERSION "1.0.13"
+#define FIRMWARE_VERSION "1.0.14"
 
 // ============================================================
 // LED
 // ============================================================
 
-#define LED_PIN 2
+const int LED_PIN [] = {2,42,41};
+const int JUMLAH_LED [] = sizeof(LED_PIN)/sizeof(LED_PIN[0]);
 
 // ============================================================
 // WDT
@@ -417,33 +418,31 @@ void blinkTask(void* parameter) {
   Serial.println("[BLINK TASK] Started");
 
   while (true) {
+   for(int i = 0; i<JUMLAH_LED; i++){
+     
+    digitalWrite(LED_PIN[i],HIGH);
 
-    digitalWrite(
-      LED_PIN,
-      HIGH
-    );
-
-    Serial.println("[LED] ON");
+    Serial.println("[LED] FORWARD");
 
     esp_task_wdt_reset();
 
-    vTaskDelay(
-      pdMS_TO_TICKS(500)
-    );
+    vTaskDelay(pdMS_TO_TICKS(75));
+     
+    digitalWrite(LED_PIN[i],LOW);
+}
 
+    for(int i = JUMLAH_LED-1; i>=0; i--){
+     
+    digitalWrite(LED_PIN[i],HIGH);
 
-    digitalWrite(
-      LED_PIN,
-      LOW
-    );
-
-    Serial.println("[LED] OFF");
+    Serial.println("[LED] REVERSE");
 
     esp_task_wdt_reset();
 
-    vTaskDelay(
-      pdMS_TO_TICKS(500)
-    );
+    vTaskDelay(pdMS_TO_TICKS(75));
+     
+    digitalWrite(LED_PIN[i],LOW);
+}
   }
 }
 
@@ -519,15 +518,12 @@ void setup() {
 
 
   // LED
-  pinMode(
-    LED_PIN,
-    OUTPUT
-  );
+  for(int i = 0; i<JUMLAH_LED; i++){
+  pinMode(LED_PIN[i],OUTPUT);
+  digitalWrite(LED_PIN[i],LOW);
+  }
 
-  digitalWrite(
-    LED_PIN,
-    LOW
-  );
+
 
 
   // WDT
