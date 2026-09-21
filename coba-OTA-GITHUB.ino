@@ -16,8 +16,8 @@
 // LED
 // ============================================================
 
-const int LED_PIN [] = {2,42,41};
-const int JUMLAH_LED [] = sizeof(LED_PIN)/sizeof(LED_PIN[0]);
+ int LED_PIN [] = {2,42,41};
+ int JUMLAH_LED [] = sizeof(LED_PIN)/sizeof(LED_PIN[0]);
 
 // ============================================================
 // WDT
