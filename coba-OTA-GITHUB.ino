@@ -10,7 +10,7 @@
 // FIRMWARE VERSION
 // ============================================================
 
-#define FIRMWARE_VERSION "1.0.11"
+#define FIRMWARE_VERSION "1.0.12"
 
 // ============================================================
 // LED
@@ -428,7 +428,7 @@ void blinkTask(void* parameter) {
     esp_task_wdt_reset();
 
     vTaskDelay(
-      pdMS_TO_TICKS(1000)
+      pdMS_TO_TICKS(100)
     );
 
 
@@ -442,7 +442,7 @@ void blinkTask(void* parameter) {
     esp_task_wdt_reset();
 
     vTaskDelay(
-      pdMS_TO_TICKS(1000)
+      pdMS_TO_TICKS(100)
     );
   }
 }
@@ -574,6 +574,6 @@ void setup() {
 void loop() {
 
   vTaskDelay(
-    pdMS_TO_TICKS(100)
+    pdMS_TO_TICKS(1000)
   );
 }
